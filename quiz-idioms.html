@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Idioms & Vocabulary Test</title>
+<link rel="stylesheet" href="quiz-template.css"/>
+</head>
+<body>
+<div class="quiz-header">
+  <a href="index.html">← Ana Səhifə</a>
+  <div class="quiz-title">🔤 Idioms &amp; Vocabulary</div>
+  <div class="quiz-counter" id="counter">1 / 50</div>
+</div>
+<div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:2%"></div></div>
+<main id="quizMain"></main>
+<div id="result-screen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+  <div class="result-title">Test Başa Çatdı!</div>
+  <div class="result-score" id="resultScore"></div>
+  <div class="result-detail">
+    <div class="result-stat"><div class="result-stat-num stat-c" id="correctCount">0</div><div class="result-stat-lbl">✅ Düzgün</div></div>
+    <div class="result-stat"><div class="result-stat-num stat-w" id="wrongCount">0</div><div class="result-stat-lbl">❌ Yanlış</div></div>
+    <div class="result-stat"><div class="result-stat-num" style="color:#2563eb" id="percentCount">0%</div><div class="result-stat-lbl">Nəticə</div></div>
+  </div>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Yenidən Başla</button>
+  <a href="index.html" class="back-btn-result">🏠 Ana Səhifə</a>
+</div>
+<script>
+var questions=[
+{q:"How many of these sentences are correct? 1.Mr.Wells and my teacher are having dinner. 2.Mr.Wells and my teacher is having dinner. 3.Mr.Wells's and my teacher is taking photos. 4.Mr.Wells and my teacher are taking photos. 5.Mine and Mr.Wells' teacher is taking photos.",opts:["All of them","None of them","4","3","2"],ans:0},
+{q:"One of the given idioms means 'with part of the pages folded down as the result of a lot of use'.",opts:["Why don't you take the bull by the horns and tell him to leave?","If libraries buy new copies of popular books, which they have to do because popular books become dog-eared and worn, more royalties go to the heirs.","I'd love to be a fly on the wall when those two get home!","Everyone knows it's a dog's life in this business.","I had a frog in my throat and had to clear my throat several times before I could answer."],ans:3},
+{q:"After two hours spent wandering in the snow, I realized we were on ...",opts:["a wolf in sheep's clothing","bookworms","like a fish out of water","a pig sty","a wild goose chase"],ans:3},
+{q:"I know it's true, because I got it straight from ... — Katie told me herself.",opts:["the dog's mouth","the frog's eyes","the horse's mouth","the chicken's feather","the donkey's eyes"],ans:2},
+{q:"Which of the given words has the definitions: 'a wide street in a town or city', 'a wide straight road with trees on both sides', 'a choice or way of making progress towards something'?",opts:["forest","street","avenue","fountain","department store"],ans:2},
+{q:"How do we call the person whose job is making and repairing wooden objects and structures?",opts:["carpet","designer","carpenter","babysitter","winner"],ans:0},
+{q:"... means 'to fasten something in place' / 'to fasten pieces of cloth together temporarily with long, loose stitches before sewing them finally'?",opts:["stick","trick","promise","tack","kick"],ans:4},
+{q:"'Clip' means ...",opts:["a small metal or plastic object used for holding things together or in place","a piece of thick woven material made of wool","sweet food made of sugar and/or chocolate, eaten between meals","a tall plant grown for its large yellow grains used for making flour","a small part of a machine that you press to make it work"],ans:2},
+{q:"Choose the sentence without predicate noun.",opts:["Love is a virtue.","He looks like a really bully.","Jenny, I have some problems.","Sorry, Mr. President, it was my fault.","Maybe this is a blessing in disguise."],ans:3},
+{q:"It's time to ... your schoolwork ... — you can't rely on your friends to help you with every class.",opts:["take / into your own hands","put / into your own hands","give / into own hands","have time / on your hands","have your hands full"],ans:2},
+{q:"One of the idioms means 'to try to discover things which do not involve you'.",opts:["I wish my neighbors would quit sticking their noses in and just leave us alone!","She turned up her nose at the job because she didn't think it had enough status.","Kids in my class were all ears when I was telling them the story.","Hey kids, shake a leg! You're going to be late for school!","I made the mildest of criticisms and he jumped down my throat."],ans:4},
+{q:"The children broke the window pane while playing and had to ... when their parents returned home.",opts:["vanish off the face of the earth","somebody's face","get a long face","face the music","put a face to a name"],ans:2},
+{q:"'...' means 'to fail or make an embarrassing mistake when you try to do something'.",opts:["do sth till you are blue in face","take sth at face value","fall flat on your face","be written all over your face","to sb's face"],ans:1},
+{q:"I (hope) that our team will win the championship again this year.",opts:["am twisting me round my little finger","am having something at my finger-tips","am crossing my fingers","am under his thumb","am counting the fingers of one hand"],ans:1},
+{q:"I usually have my address book at my fingertips. This means ...",opts:["to believe in luck","to buy","a talent for gardening","to persuade somebody to do anything you want","to be able to find it easily"],ans:1},
+{q:"Now we have fewer staff in this department, I'm rushed off my feet. This means ...",opts:["I am very busy.","I am very happy.","I am very disappointed.","I am very excited.","I am feeling suspicious."],ans:0},
+{q:"Which of these idioms means 'to go to a place'?",opts:["stand on your own feet","keep your feet on the ground","land on your feet","think on your feet","set foot in/on"],ans:3},
+{q:"One of these idioms means 'used to say that someone becomes sad or disappointed about something'.",opts:["break sb's heart","have heart-to-heart about sth","heart sink","have a change of heart","have heart of stone"],ans:3},
+{q:"I didn't want to believe it, but ... I knew that it was true.",opts:["heart is in sth","have a heart of gold","near to your heart","in my heart of hearts","a woman after your own heart"],ans:1},
+{q:"Match the proverbs with their definitions: 1.Every cloud has a silver lining. 2.The grass is always greener on the other side of the fence. 3.The squeaky wheel gets the grease. Which order matches: a.complaining gets attention b.others' lives look better c.difficult times lead to better things?",opts:["1c, 2b, 3a","1a, 2c, 3b","1b, 2a, 3c","1c, 2a, 3b","1a, 2b, 3c"],ans:0},
+{q:"My sister lives in Alaska, so I only see her once in a blue moon. This means ...",opts:["very often","not very often","always","usually","once a month"],ans:1},
+{q:"Almost 3,000 jobs have been lost recently, and a further 3,000 are on a line. This means ...",opts:["are sacked","are abroad","are satisfied","want a higher salary","are at risk"],ans:1},
+{q:"We'd been out walking all day and I was on my last legs when we reached the hotel. This means ...",opts:["very happy","very tired","very disappointed","very astonished","very thoughtful"],ans:0},
+{q:"Match the sentences with the phrasal verb 'take': 1.She took me ... completely with her story. 2.Halfway through the chapter I realized I hadn't taken anything .... 3.How many teeth did the dentist take ...? 4.I've taken ... waking up very early. 5.He hasn't taken ... his new school.",opts:["1-in, 2-in, 3-out, 4-to, 5-to","1-in, 2-in, 3-out, 4-to, 5-to","1-to, 2-in, 3-out, 4-to, 5-to","1-in, 2-in, 3-out, 4-to, 5-in","1-in, 2-out, 3-in, 4-to, 5-to"],ans:1},
+{q:"Match the phrasal verbs: 1.Glenn has taken ... painting. 2.As the plane was taking ..., I realised I hadn't turned off the iron. 3.It must be difficult to give ... teaching in order to travel. 4.John's always been difficult. He must take ... his dad. 5.This meat can't be fresh — taking it ... to the butcher. 6.Brendan was taken ... by her sudden question. 7.He was homeless, so we took him ....",opts:["1-up, 2-off, 3-up, 4-after, 5-back, 6-aback, 7-in","1-off, 2-up, 3-back, 4-after, 5-in, 6-aback, 7-up","1-up, 2-off, 3-up, 4-in, 5-back, 6-aback, 7-after","1-after, 2-off, 3-up, 4-up, 5-back, 6-in, 7-aback","1-up, 2-in, 3-off, 4-after, 5-back, 6-aback, 7-up"],ans:0},
+{q:"Match 1-5 with a-e: 1.an apparent misfortune that eventually has good results. 2.unexpectedly. 3.to stop behaving or living in a way that is not practical. 4.to need to consider something again, because you are wrong. 5.to get more than one expected.",opts:["1-a (blessing in disguise), 2-c (out of the blue), 3-e (come back to earth), 4-d (got another think coming), 5-b (harder than one bargains for)","1-b, 2-a, 3-c, 4-d, 5-e","1-c, 2-b, 3-a, 4-e, 5-d","1-a, 2-b, 3-c, 4-d, 5-e","1-d, 2-c, 3-b, 4-a, 5-e"],ans:2},
+{q:"'To have/keep an eye on someone or something' means ...",opts:["to be in love with someone","to watch carefully","to be jealous of someone","to ignore someone","to forget someone"],ans:2},
+{q:"'To turn a blind eye to something' means ...",opts:["to look at something carefully","to pretend not to notice","to be surprised at something","to correct a mistake","to explain something clearly"],ans:4},
+{q:"Which idiom means 'to avoid making a decision or taking sides in a dispute'?",opts:["keep your chin up","sit on the fence","bite the bullet","burn bridges","miss the boat"],ans:4},
+{q:"'It cost an arm and a leg' means ...",opts:["it was very cheap","it was very expensive","it was dangerous","it was unnecessary","it was stolen"],ans:0},
+{q:"'To bite the bullet' means ...",opts:["to eat too fast","to be very aggressive","to endure a difficult or painful situation","to make a careless mistake","to refuse to cooperate"],ans:2},
+{q:"Which idiom means 'to suddenly become very angry'?",opts:["hit the nail on the head","hit the roof","hit the road","hit the books","hit the sack"],ans:3},
+{q:"'To let the cat out of the bag' means ...",opts:["to release a cat","to reveal a secret unintentionally","to make someone angry","to cause a lot of trouble","to be very mysterious"],ans:0},
+{q:"'Under the weather' means ...",opts:["outside in bad weather","feeling ill or unwell","being very successful","working too hard","being very cold"],ans:1},
+{q:"Which idiom means 'to not tell someone important news until the last moment'?",opts:["add fuel to the fire","keep someone in the dark","bite the hand that feeds you","pass the buck","pull someone's leg"],ans:3},
+{q:"'To pull someone's leg' means ...",opts:["to hurt someone physically","to force someone to do something","to joke with someone or tell them something that is not true","to help someone in need","to follow someone secretly"],ans:4},
+{q:"Which idiom means 'very common and not interesting or exciting'?",opts:["out of the blue","run-of-the-mill","once in a blue moon","at the drop of a hat","in the same boat"],ans:1},
+{q:"'In the same boat' means ...",opts:["travelling together","sharing the same difficult situation","working together on a project","having the same hobby","living in the same place"],ans:1},
+{q:"'To get cold feet' means ...",opts:["to feel physically cold","to become nervous or frightened about doing something you had planned to do","to refuse someone's request","to fail at something important","to lose a competition"],ans:3},
+{q:"Which idiom means 'to finally understand something after a long time'?",opts:["see eye to eye","see the light","see red","see the big picture","see through someone"],ans:3},
+{q:"'To see eye to eye' means ...",opts:["to stare at someone","to agree with someone about something","to be physically close to someone","to compete with someone","to misunderstand someone"],ans:2},
+{q:"'To beat around the bush' means ...",opts:["to exercise in the garden","to avoid talking about what is most important","to make a lot of noise","to search for something carefully","to hide in a forest"],ans:3},
+{q:"Which idiom means 'to do something difficult or risky that might fail'?",opts:["jump on the bandwagon","go out on a limb","pass the buck","sit on the fence","bite the hand that feeds you"],ans:3},
+{q:"'To burn the midnight oil' means ...",opts:["to waste energy","to work or study late into the night","to be very angry","to celebrate something","to cause a fire"],ans:0},
+{q:"Which idiom means 'to decide to do something at the last minute without planning'?",opts:["play it by ear","bite off more than you can chew","let sleeping dogs lie","kick the bucket","jump to conclusions"],ans:0},
+{q:"'To bite off more than you can chew' means ...",opts:["to eat too much food","to take on more responsibility than you can handle","to be very greedy","to make a careless mistake","to refuse help from others"],ans:4},
+{q:"'Let sleeping dogs lie' means ...",opts:["to be lazy","to avoid bringing up old problems or arguments","to be very quiet","to ignore everyone around you","to pretend to sleep"],ans:1},
+{q:"Which idiom means 'to die'?",opts:["kick the bucket","bite the bullet","hit the sack","see the light","jump the gun"],ans:4},
+{q:"'To jump to conclusions' means ...",opts:["to be very athletic","to make a quick decision without thinking carefully first","to celebrate success","to be overly enthusiastic","to agree with everyone"],ans:0},
+{q:"'The ball is in your court' means ...",opts:["you are playing sport","it is now your turn to take action or make a decision","you have won a game","you are responsible for someone else","you need to ask for help"],ans:2}
+];
+var score=0,wrong=0;
+function buildQuestions(){
+  var main=document.getElementById("quizMain");
+  main.innerHTML="";
+  questions.forEach(function(q,i){
+    var card=document.createElement("div");
+    card.className="question-card"+(i===0?" active":"");
+    card.id="q"+i;
+    var L=["A","B","C","D","E"];
+    var optsHtml=q.opts.map(function(opt,oi){
+      return "<button class=\"option-btn\" onclick=\"answer("+i+","+oi+")\" id=\"opt_"+i+"_"+oi+"\"><span class=\"option-label\">"+L[oi]+"</span><span>"+opt+"</span></button>";
+    }).join("");
+    card.innerHTML="<div class=\"q-header\"><span class=\"q-number\">Sual "+(i+1)+"/"+questions.length+"</span><span class=\"q-text\">"+q.q+"</span></div><div class=\"options\">"+optsHtml+"</div><div class=\"feedback\" id=\"fb_"+i+"\"></div><div class=\"q-nav\"><button class=\"next-btn\" id=\"next_"+i+"\" onclick=\"nextQ("+i+")\">"+( i<questions.length-1?"Novbeti &#8594;":"Netice &#128202;")+"</button></div>";
+    main.appendChild(card);
+  });
+}
+function answer(qIdx,optIdx){
+  var q=questions[qIdx];
+  var btns=document.querySelectorAll("[id^=\"opt_"+qIdx+"_\"]");
+  for(var b=0;b<btns.length;b++){btns[b].disabled=true;}
+  var fb=document.getElementById("fb_"+qIdx);
+  var L=["A","B","C","D","E"];
+  if(optIdx===q.ans){
+    score++;
+    document.getElementById("opt_"+qIdx+"_"+optIdx).classList.add("correct");
+    fb.innerHTML="&#10003; Duzgundur!";
+    fb.className="feedback show correct-fb";
+  } else {
+    wrong++;
+    document.getElementById("opt_"+qIdx+"_"+optIdx).classList.add("wrong");
+    document.getElementById("opt_"+qIdx+"_"+q.ans).classList.add("correct");
+    fb.innerHTML="&#10007; Yanlisdir! Duzgun cavab: "+L[q.ans]+") "+q.opts[q.ans];
+    fb.className="feedback show wrong-fb";
+  }
+  document.getElementById("next_"+qIdx).classList.add("show");
+}
+function nextQ(cur){
+  document.getElementById("q"+cur).classList.remove("active");
+  var nxt=cur+1;
+  if(nxt<questions.length){
+    document.getElementById("q"+nxt).classList.add("active");
+    var pct=Math.round((nxt/questions.length)*100);
+    document.getElementById("progressBar").style.width=Math.max(pct,1)+"%";
+    document.getElementById("counter").textContent=(nxt+1)+" / "+questions.length;
+  } else {showResult();}
+}
+function showResult(){
+  document.getElementById("quizMain").style.display="none";
+  document.getElementById("result-screen").classList.add("show");
+  var pct=Math.round((score/questions.length)*100);
+  var el=document.getElementById("resultScore");
+  el.textContent=score+" / "+questions.length;
+  el.className="result-score "+(pct>=70?"score-green":pct>=50?"score-yellow":"score-red");
+  document.getElementById("resultEmoji").textContent=pct>=70?"🎉":pct>=50?"👍":"💪";
+  document.getElementById("correctCount").textContent=score;
+  document.getElementById("wrongCount").textContent=wrong;
+  document.getElementById("percentCount").textContent=pct+"%";
+  document.getElementById("progressBar").style.width="100%";
+}
+function restartQuiz(){
+  score=0;wrong=0;
+  document.getElementById("result-screen").classList.remove("show");
+  document.getElementById("quizMain").style.display="";
+  document.getElementById("progressBar").style.width="2%";
+  document.getElementById("counter").textContent="1 / "+questions.length;
+  buildQuestions();
+}
+buildQuestions();
+</script>
+</body>
+</html>

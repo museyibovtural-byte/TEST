@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Şəhla Müseyibova — İngilis Dili Müəllimi</title>
+  <meta name="description" content="Şəhla Müseyibova — MHM İngilis dili müəlliminin rəsmi tədris portalu. Qrammatika testləri, mətnlər, lüğət, qarışıq və sınaq imtahanları.">
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; }</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar">
+  <a href="#hero" class="navbar-brand" onclick="scrollToSection('hero')">
+    📚 <span>Şəhla</span>&nbsp;Müseyibova
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#hero"      onclick="scrollToSection('hero')"      data-i18n="nav_home">Ana Səhifə</a></li>
+    <li><a href="#materials" onclick="scrollToSection('materials')" data-i18n="nav_materials">Materiallar</a></li>
+    <li><a href="#about"     onclick="scrollToSection('about')"     data-i18n="nav_about">Haqqımda</a></li>
+    <li><a href="mailto:shehlamuseyibova@mail.ru"                   data-i18n="nav_contact">Əlaqə</a></li>
+  </ul>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="az" onclick="setLang('az')">AZ</button>
+    <button class="lang-btn"        data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+
+    <!-- Photo -->
+    <div class="photo-placeholder" id="photoWrap" title="Foto əlavə ediləcək">
+      👩‍🏫
+    </div>
+    <!--
+      Foto əlavə etmək üçün:
+      1. Şəklinizin adını "photo.jpg" qoyun
+      2. Bu qovluğa (shehla-museyibova/) kopyalayın
+      3. Aşağıdakı satırı aktiv edin (yuxarıdakı div-i silin):
+      <div class="hero-photo"><img src="photo.jpg" alt="Şəhla Müseyibova" /></div>
+    -->
+
+    <!-- Info -->
+    <div class="hero-info">
+      <div class="badge" data-i18n="hero_badge">Müəllim Portalı</div>
+      <h1 data-i18n="hero_title">Şəhla Müseyibova</h1>
+      <div class="subtitle" data-i18n="hero_subtitle">İngilis Dili Müəllimi</div>
+      <div class="school">🏫 <span data-i18n="hero_school">MHM</span></div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">15</div>
+          <div class="stat-label" data-i18n="stat_exp">İl Təcrübə</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label" data-i18n="stat_materials">Material</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5</div>
+          <div class="stat-label" data-i18n="stat_cats">Kateqoriya</div>
+        </div>
+      </div>
+
+      <div class="hero-contacts">
+        <a href="mailto:shehlamuseyibova@mail.ru" class="hero-contact-btn">
+          ✉️ shehlamuseyibova@mail.ru
+        </a>
+        <a href="tel:+994515150266" class="hero-contact-btn">
+          📞 +994 51 515 02 66
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MATERIALS ===================== -->
+<main>
+  <section id="materials">
+    <h2 class="section-title" data-i18n="materials_title">Tədris Materialları</h2>
+    <p class="section-subtitle" data-i18n="materials_sub">Bütün kateqoriyalar üzrə hazır sınaq materialları</p>
+    <div class="section-divider"></div>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Material axtar..."
+        data-i18n-placeholder="search_placeholder"
+      />
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="all"     onclick="activateTab('all')">
+        📂 <span data-i18n="tab_all">Hamısı</span> <span class="tab-count">5</span>
+      </button>
+      <button class="tab-btn" data-tab="grammar"  onclick="activateTab('grammar')">
+        📝 <span data-i18n="tab_grammar">Grammar Tests</span> <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="texts"    onclick="activateTab('texts')">
+        📖 <span data-i18n="tab_texts">Texts</span> <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="vocab"    onclick="activateTab('vocab')">
+        🔤 <span data-i18n="tab_vocab">Vocabulary</span> <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="mixed"    onclick="activateTab('mixed')">
+        🔀 <span data-i18n="tab_mixed">Mixed</span> <span class="tab-count">1</span>
+      </button>
+      <button class="tab-btn" data-tab="exam"     onclick="activateTab('exam')">
+        📋 <span data-i18n="tab_exam">Trial Exams</span> <span class="tab-count">1</span>
+      </button>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="cards-grid" id="cardsGrid">
+
+      <!-- 1. GRAMMAR TEST — Noun -->
+      <div class="material-card" data-category="grammar">
+        <div class="card-header">
+          <div class="card-icon">📝</div>
+          <div class="card-header-info">
+            <div class="card-category" data-i18n="tab_grammar">Grammar Tests</div>
+            <div class="card-title">Noun · İsim</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-description" data-i18n="noun_grammar_desc">
+            İsim mövzusuna aid dərin qrammatik test — çoxsaylı seçim sualları ilə.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Noun</span>
+            <span class="tag">Grammar</span>
+            <span class="tag">Multiple Choice</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a class="download-btn" href="quiz-grammar.html" style="background:linear-gradient(135deg,#2563eb,#1a3a6b);">
+            🎯 <span>Testi Başla / Start Test</span>
+          </a>
+          <span class="card-level level-advanced" data-i18n="level_advanced">Yüksək Səviyyə</span>
+        </div>
+      </div>
+
+      <!-- 2. TEXTS — Situational Tests -->
+      <div class="material-card" data-category="texts">
+        <div class="card-header">
+          <div class="card-icon">📖</div>
+          <div class="card-header-info">
+            <div class="card-category" data-i18n="tab_texts">Texts</div>
+            <div class="card-title">Situational Tests</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-description" data-i18n="situational_desc">
+            Real həyat vəziyyətlərinə əsaslanan situasional testlər.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Situational</span>
+            <span class="tag">Communication</span>
+            <span class="tag">Reading</span>
+          </div>
+          <!-- Sample Questions Preview -->
+          <details style="margin-top:8px;">
+            <summary style="cursor:pointer;font-size:0.8rem;color:#2563eb;font-weight:600;">Nümunəyə bax / Preview</summary>
+            <div style="margin-top:8px;font-size:0.8rem;color:#475569;line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px;">
+              <strong>Sample Q1:</strong> Your son has just moved to a new school... You're trying to comfort him and you say:<br>
+              <em>E) The first days are all the same. Don't worry; you will make friends as time passes.</em>
+            </div>
+          </details>
+        </div>
+        <div class="card-footer">
+          <a class="download-btn" href="quiz-situational.html" style="background:linear-gradient(135deg,#2563eb,#1a3a6b);">
+            🎯 <span>Testi Başla / Start Test</span>
+          </a>
+          <span class="card-level level-text" data-i18n="level_text">Mətn</span>
+        </div>
+      </div>
+
+      <!-- 3. VOCABULARY — Idioms -->
+      <div class="material-card" data-category="vocab">
+        <div class="card-header">
+          <div class="card-icon">🔤</div>
+          <div class="card-header-info">
+            <div class="card-category" data-i18n="tab_vocab">Vocabulary</div>
+            <div class="card-title">Idioms</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-description" data-i18n="idioms_desc">
+            İngilis dilinin idiomlarını əhatə edən lüğət testi.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Idioms</span>
+            <span class="tag">Vocabulary</span>
+            <span class="tag">Expressions</span>
+          </div>
+          <details style="margin-top:8px;">
+            <summary style="cursor:pointer;font-size:0.8rem;color:#2563eb;font-weight:600;">Nümunəyə bax / Preview</summary>
+            <div style="margin-top:8px;font-size:0.8rem;color:#475569;line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px;">
+              <strong>Sample:</strong> "After two hours spent wandering in the snow, I realized we were on…"<br>
+              <em>E) a wild goose chase</em>
+            </div>
+          </details>
+        </div>
+        <div class="card-footer">
+          <a class="download-btn" href="quiz-idioms.html" style="background:linear-gradient(135deg,#2563eb,#1a3a6b);">
+            🎯 <span>Testi Başla / Start Test</span>
+          </a>
+          <span class="card-level level-vocab" data-i18n="level_vocab">Lüğət</span>
+        </div>
+      </div>
+
+      <!-- 4. MIXED — NOUN Mixed -->
+      <div class="material-card" data-category="mixed">
+        <div class="card-header">
+          <div class="card-icon">🔀</div>
+          <div class="card-header-info">
+            <div class="card-category" data-i18n="tab_mixed">Mixed</div>
+            <div class="card-title">Noun &amp; Agreement — Mixed</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-description" data-i18n="noun_mixed_desc">
+            İsimlər və uyğunluq qaydaları üzrə kompleks qarışıq test.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Noun</span>
+            <span class="tag">Agreement</span>
+            <span class="tag">Advanced</span>
+            <span class="tag">Mixed</span>
+          </div>
+          <details style="margin-top:8px;">
+            <summary style="cursor:pointer;font-size:0.8rem;color:#2563eb;font-weight:600;">Nümunəyə bax / Preview</summary>
+            <div style="margin-top:8px;font-size:0.8rem;color:#475569;line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px;">
+              <strong>Sample Q3:</strong> "...we were delighted to hear our voices create multiple distinct _______ against the valley walls."<br>
+              <em>D) echoes</em>
+            </div>
+          </details>
+        </div>
+        <div class="card-footer">
+          <a class="download-btn" href="quiz-noun.html" style="background:linear-gradient(135deg,#2563eb,#1a3a6b);">
+            🎯 <span>Testi Başla / Start Test</span>
+          </a>
+          <span class="card-level level-mixed" data-i18n="level_mixed">Qarışıq</span>
+        </div>
+      </div>
+
+      <!-- 5. TRIAL EXAM — May Sınağı -->
+      <div class="material-card" data-category="exam">
+        <div class="card-header">
+          <div class="card-icon">📋</div>
+          <div class="card-header-info">
+            <div class="card-category" data-i18n="tab_exam">Trial Exams</div>
+            <div class="card-title">May Sınağı / Trial Exam</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-description" data-i18n="may_exam_desc">
+            May imtahanı formatında hazırlanmış sınaq testi.
+          </p>
+          <div class="card-tags">
+            <span class="tag">Trial Exam</span>
+            <span class="tag">Grammar</span>
+            <span class="tag">Vocabulary</span>
+            <span class="tag">Comprehensive</span>
+          </div>
+          <details style="margin-top:8px;">
+            <summary style="cursor:pointer;font-size:0.8rem;color:#2563eb;font-weight:600;">Nümunəyə bax / Preview</summary>
+            <div style="margin-top:8px;font-size:0.8rem;color:#475569;line-height:1.6;background:#f8fafc;border-radius:8px;padding:10px;">
+              <strong>Sample Q1:</strong> "Had this 70m-long asteroid entered the Earth's atmosphere, it could have ___ a large city."<br>
+              <em>D) destroyed</em>
+            </div>
+          </details>
+        </div>
+        <div class="card-footer">
+          <a class="download-btn" href="quiz-mixed.html" style="background:linear-gradient(135deg,#2563eb,#1a3a6b);">
+            🎯 <span>Testi Başla / Start Test</span>
+          </a>
+          <span class="card-level level-exam" data-i18n="level_exam">Sınaq İmtahanı</span>
+        </div>
+      </div>
+
+    </div><!-- /cards-grid -->
+
+    <div class="no-results" id="noResults">
+      🔍 Axtarışa uyğun material tapılmadı.
+    </div>
+
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" style="margin-top: 60px;">
+    <h2 class="section-title" data-i18n="about_title">Haqqımda</h2>
+    <p class="section-subtitle" data-i18n="about_sub">Şəxsi Məlumatlar</p>
+    <div class="section-divider"></div>
+
+    <div class="about-card">
+      <div>
+        <div class="about-item">
+          <div class="about-icon">👤</div>
+          <div>
+            <div class="about-item-label" data-i18n="about_name">Ad Soyad</div>
+            <div class="about-item-val">Şəhla Müseyibova</div>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-icon">💼</div>
+          <div>
+            <div class="about-item-label" data-i18n="about_pos">Vəzifə</div>
+            <div class="about-item-val" data-i18n="about_pos_val">İngilis Dili Müəllimi</div>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-icon">🏫</div>
+          <div>
+            <div class="about-item-label" data-i18n="about_school">Məktəb</div>
+            <div class="about-item-val">MHM</div>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-icon">⭐</div>
+          <div>
+            <div class="about-item-label" data-i18n="about_spec">İxtisas</div>
+            <div class="about-item-val" data-i18n="about_spec_val">İngilis Dili</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="about-item">
+          <div class="about-icon">🗓️</div>
+          <div>
+            <div class="about-item-label" data-i18n="about_exp">Təcrübə</div>
+            <div class="about-item-val" data-i18n="about_exp_val">15 il</div>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-icon">✉️</div>
+          <div>
+            <div class="about-item-label" data-i18n="about_email">Email</div>
+            <div class="about-item-val">
+              <a href="mailto:shehlamuseyibova@mail.ru" style="color:#2563eb;">
+                shehlamuseyibova@mail.ru
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="about-item">
+          <div class="about-icon">📞</div>
+          <div>
+            <div class="about-item-label" data-i18n="about_phone">Telefon</div>
+            <div class="about-item-val">
+              <a href="tel:+994515150266" style="color:#2563eb;">+994 51 515 02 66</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <p data-i18n="footer_copy">© 2024 Şəhla Müseyibova. Bütün hüquqlar qorunur.</p>
+  <p style="margin-top:6px; font-size:0.78rem;">
+    ✉️ <a href="mailto:shehlamuseyibova@mail.ru">shehlamuseyibova@mail.ru</a>
+    &nbsp;|&nbsp;
+    📞 <a href="tel:+994515150266">+994 51 515 02 66</a>
+  </p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

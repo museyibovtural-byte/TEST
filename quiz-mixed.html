@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>May Sınağı — Mixed Grammar Test</title>
+<link rel="stylesheet" href="quiz-template.css"/>
+</head>
+<body>
+
+<div class="quiz-header">
+  <a href="index.html">← Ana Səhifə</a>
+  <div class="quiz-title">📋 May Sınağı — Mixed</div>
+  <div class="quiz-counter" id="counter">1 / 23</div>
+</div>
+<div class="progress-wrap">
+  <div class="progress-bar" id="progressBar" style="width:4.35%"></div>
+</div>
+
+<main id="quizMain">
+  <!-- Questions injected by JS -->
+</main>
+
+<div id="result-screen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+  <div class="result-title">Test Başa Çatdı!</div>
+  <div class="result-score" id="resultScore"></div>
+  <div class="result-detail">
+    <div class="result-stat"><div class="result-stat-num stat-c" id="correctCount">0</div><div class="result-stat-lbl">✅ Düzgün</div></div>
+    <div class="result-stat"><div class="result-stat-num stat-w" id="wrongCount">0</div><div class="result-stat-lbl">❌ Yanlış</div></div>
+    <div class="result-stat"><div class="result-stat-num" style="color:#2563eb" id="percentCount">0%</div><div class="result-stat-lbl">Nəticə</div></div>
+  </div>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Yenidən Başla</button>
+  <a href="index.html" class="back-btn-result">🏠 Ana Səhifə</a>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Had this 70 m.-long asteroid entered the Earth's atmosphere, it could have ___ a large city.",
+    opts: ["reconciled","inflated","captured","destroyed","erupted"],
+    ans: 3
+  },
+  {
+    q: "Researchers attending the World Water Forum in Kyoto last year argued that collecting and using water more ___ would lessen the need for more dams.",
+    opts: ["efficiently","plentifully","wastefully","remarkably","speedily"],
+    ans: 0
+  },
+  {
+    q: "Apparently the drop in farm incomes had nothing ___ the introduction of modern farming methods.",
+    opts: ["close down","make out","sort out","force out","do with"],
+    ans: 4
+  },
+  {
+    q: "Since the equator is the closest place ___ earth to the sun, the atmosphere ___ it absorbs the most solar energy.",
+    opts: ["in / at","of / through","with / across","at / over","on / around"],
+    ans: 4
+  },
+  {
+    q: "Schizophrenia, a behavioural ___, may well be triggered by genetic predisposition, stress, drugs, or infections.",
+    opts: ["inclination","disorder","diagnosis","inhibition","transplantation"],
+    ans: 1
+  },
+  {
+    q: "I think Jack ___ moving to a quieter area when he ___ next summer.",
+    opts: ["has considered / will retire","considered / will have retired","will be considering / retire","is considering / retires","had considered / is retiring"],
+    ans: 3
+  },
+  {
+    q: "Whereas in 1975 only one in every ten new enterprises ___ by a woman, in 1989 this figure ___ to one in three.",
+    opts: ["established / was increased","was established / had increased","was establishing / would increase","had established / had been increased","would establish / was increasing"],
+    ans: 1
+  },
+  {
+    q: "Although the scientific community had hoped that the field of transplantation ___, the shortage of organ donors has curtailed research.",
+    opts: ["has progressed","would progress","must have progressed","is progressing","had progressed"],
+    ans: 4
+  },
+  {
+    q: "Jane wasn't actually feeling fit enough to work overtime; ___, she did it as she was in dire need of money.",
+    opts: ["therefore","besides","nonetheless","despite","on the other hand"],
+    ans: 2
+  },
+  {
+    q: "Some of the delegates were ___ with the Chairman's speech ___ they walked out.",
+    opts: ["too disappointed / that","more disappointing / than","so disappointed / that","so disappointing / than","as disappointed / as"],
+    ans: 2
+  },
+  {
+    q: "This material is ___ to be stitched together on a sewing machine.",
+    opts: ["too delicate","as delicately as","so delicate that","delicately enough","such a delicate"],
+    ans: 3
+  },
+  {
+    q: "___ engaged in as competition ___ as recreation, water-skiing is an exhilarating outdoor sport.",
+    opts: ["No sooner / than","Unless / and","Whether / or","Hardly / when","The more / the less"],
+    ans: 2
+  },
+  {
+    q: "___ the work was physically demanding, and at times we felt really exhausted, seeing the end result was very satisfying.",
+    opts: ["Owing to","Even though","No matter","As though","However"],
+    ans: 1
+  },
+  {
+    q: "Which of the following sentences can be converted to passive voice by means of 'it'? 1.We agreed to be there at 2 o'clock. 2.We expected to be there at 2 o'clock. 3.We started to make a profit. 4.They decided to live there forever.",
+    opts: ["1, 4","All of them","2, 3","All except 1","All except 3"],
+    ans: 3
+  },
+  {
+    q: "Choose the odd one out. Original: 'Hadn't I missed that plane on that day, I wouldn't be alive now.'",
+    opts: ["Aren't I lucky to have missed that plane!","If I am alive today, it is because I didn't get on that plane that day.","The fact that I am alive today is due to the fact that I didn't miss that plane.","If I hadn't missed that plane, I wouldn't be here talking to you now.","I owe my life to the fact that I missed that plane that day."],
+    ans: 2
+  },
+  {
+    q: "Choose the odd one out. Original: 'The man left the room angrily. You had talked to that man's wife the day before.'",
+    opts: ["The man left the room angrily because you had talked to his wife the day before.","The man whose wife you had talked to the day before left the room angrily.","The man who left the room angrily is the husband of the woman you had talked to the day before.","I don't know whether or not the man was angry because you had talked to his wife the day before.","All I know is that you had talked to that man's wife the day before and that he now left the room angrily."],
+    ans: 3
+  },
+  {
+    q: "Whether you're a mother, a mother-to-be or not even thinking about being a mom, there is still something to interest you in this book. Which sentence best expresses this?",
+    opts: ["The secrets of making a successful marriage are revealed in this book for all women, married or not.","This book offers us a comparison between women who are also mothers and those who are not even thinking of becoming a mother.","All men and women must read this book in order to learn something about what motherhood means.","This book was written by women, for women, about women, whether they are mothers or not.","You would be wise to read this book if you are already a mother, or if you are shortly to become a mother, or even if you have no intention of ever becoming a mother."],
+    ans: 4
+  },
+  {
+    q: "Mankind first used indestructible materials to erect large structures ___ in but ___ their gods from.",
+    opts: ["without living / being worshipped","to be living / having worshipped","having lived / to be worshipped","not to live / to worship","by not living / worshipped"],
+    ans: 2
+  },
+  {
+    q: "___ at the details of the famous sculptor Rodin's works, we can see his ability ___ feeling through facial expression and through hands.",
+    opts: ["To look / being conveyed","By looking / to convey","Having looked / convey","To be looking / conveying","Being looked / to be conveying"],
+    ans: 1
+  },
+  {
+    q: "Remember ___ off the washing machine before you leave home, will you?",
+    opts: ["switching","to have switched","having switched","switch","to switch"],
+    ans: 4
+  },
+  {
+    q: "Both sides seem ___ on to their determination ___ a peaceful solution, don't they?",
+    opts: ["to be held / finding","to be holding / to find","holding / to be finding","having held / found","held / having found"],
+    ans: 1
+  },
+  {
+    q: "I wish you ___ me from the station to inform me that you were on your way — I ___ the dinner ready for your arrival home.",
+    opts: ["phone / can prepare","have phoned / will have prepared","phoned / will be preparing","would phone / have prepared","had phoned / could have prepared"],
+    ans: 4
+  },
+  {
+    q: "Had the Millennium Dome not been built, 750 million pounds ___ on health and education.",
+    opts: ["can be spent","must have been spent","could have been spent","will have spent","had been spending"],
+    ans: 2
+  }
+];
+
+let current = 0;
+let score = 0;
+let wrong = 0;
+
+function buildQuestions() {
+  const main = document.getElementById('quizMain');
+  main.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card' + (i === 0 ? ' active' : '');
+    card.id = 'q' + i;
+
+    const labels = ['A','B','C','D','E'];
+    const optsHtml = q.opts.map((opt, oi) => `
+      <button class="option-btn" onclick="answer(${i},${oi})" id="opt_${i}_${oi}">
+        <span class="option-label">${labels[oi]}</span>
+        <span>${opt}</span>
+      </button>`).join('');
+
+    card.innerHTML = `
+      <div class="q-header">
+        <span class="q-number">Sual ${i+1}/${questions.length}</span>
+        <span class="q-text">${q.q}</span>
+      </div>
+      <div class="options">${optsHtml}</div>
+      <div class="feedback" id="fb_${i}"></div>
+      <div class="q-nav">
+        <button class="next-btn" id="next_${i}" onclick="nextQ(${i})">
+          ${i < questions.length-1 ? 'Növbəti Sual →' : '📊 Nəticəyə Bax'}
+        </button>
+      </div>`;
+    main.appendChild(card);
+  });
+}
+
+function answer(qIdx, optIdx) {
+  const q = questions[qIdx];
+  const buttons = document.querySelectorAll(`[id^="opt_${qIdx}_"]`);
+  buttons.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('fb_' + qIdx);
+  const labels = ['A','B','C','D','E'];
+
+  if (optIdx === q.ans) {
+    score++;
+    document.getElementById(`opt_${qIdx}_${optIdx}`).classList.add('correct');
+    fb.textContent = '✅ Düzgündür!';
+    fb.className = 'feedback show correct-fb';
+  } else {
+    wrong++;
+    document.getElementById(`opt_${qIdx}_${optIdx}`).classList.add('wrong');
+    document.getElementById(`opt_${qIdx}_${q.ans}`).classList.add('correct');
+    fb.textContent = `❌ Yanlışdır! Düzgün cavab: ${labels[q.ans]}) ${q.opts[q.ans]}`;
+    fb.className = 'feedback show wrong-fb';
+  }
+
+  document.getElementById('next_' + qIdx).classList.add('show');
+}
+
+function nextQ(current) {
+  document.getElementById('q' + current).classList.remove('active');
+  const next = current + 1;
+  if (next < questions.length) {
+    document.getElementById('q' + next).classList.add('active');
+    updateProgress(next);
+  } else {
+    showResult();
+  }
+}
+
+function updateProgress(idx) {
+  const pct = Math.round(((idx) / questions.length) * 100);
+  document.getElementById('progressBar').style.width = Math.max(pct, 2) + '%';
+  document.getElementById('counter').textContent = (idx+1) + ' / ' + questions.length;
+}
+
+function showResult() {
+  document.getElementById('quizMain').style.display = 'none';
+  const rs = document.getElementById('result-screen');
+  rs.classList.add('show');
+  const pct = Math.round((score / questions.length) * 100);
+  const scoreEl = document.getElementById('resultScore');
+  scoreEl.textContent = score + ' / ' + questions.length;
+  scoreEl.className = 'result-score ' + (pct >= 70 ? 'score-green' : pct >= 50 ? 'score-yellow' : 'score-red');
+  document.getElementById('resultEmoji').textContent = pct >= 70 ? '🎉' : pct >= 50 ? '👍' : '💪';
+  document.getElementById('correctCount').textContent = score;
+  document.getElementById('wrongCount').textContent = wrong;
+  document.getElementById('percentCount').textContent = pct + '%';
+  document.getElementById('progressBar').style.width = '100%';
+}
+
+function restartQuiz() {
+  current = 0; score = 0; wrong = 0;
+  document.getElementById('result-screen').classList.remove('show');
+  document.getElementById('quizMain').style.display = '';
+  updateProgress(0);
+  buildQuestions();
+}
+
+buildQuestions();
+</script>
+</body>
+</html>

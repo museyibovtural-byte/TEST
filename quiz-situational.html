@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Situational Tests | Şəhla Müseyibova</title>
+<link rel="stylesheet" href="quiz-template.css"/>
+</head>
+<body>
+<div class="quiz-header">
+  <a href="index.html">&#8592; Ana Səhifə</a>
+  <div class="quiz-title">&#128218; Situational Tests</div>
+  <div class="quiz-counter" id="counter">1 / 85</div>
+</div>
+<div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:1.2%"></div></div>
+<main id="quizMain"></main>
+<div id="result-screen">
+  <div class="result-emoji" id="resultEmoji">&#127942;</div>
+  <div class="result-title">Test Başa Çatdı!</div>
+  <div class="result-score" id="resultScore"></div>
+  <div class="result-detail">
+    <div class="result-stat"><div class="result-stat-num stat-c" id="correctCount">0</div><div class="result-stat-lbl">&#10003; Düzgün</div></div>
+    <div class="result-stat"><div class="result-stat-num stat-w" id="wrongCount">0</div><div class="result-stat-lbl">&#10007; Yanlış</div></div>
+    <div class="result-stat"><div class="result-stat-num" style="color:#2563eb" id="percentCount">0%</div><div class="result-stat-lbl">Nəticə</div></div>
+  </div>
+  <button class="restart-btn" onclick="restartQuiz()">&#128257; Yenidən Başla</button>
+  <a href="index.html" class="back-btn-result">&#127968; Ana Səhifə</a>
+</div>
+<script src="quiz-situational-data.js"></script>
+<script>
+var score=0,wrong=0;
+function buildQuestions(){
+  var main=document.getElementById("quizMain");
+  main.innerHTML="";
+  questions.forEach(function(q,i){
+    var card=document.createElement("div");
+    card.className="question-card"+(i===0?" active":"");
+    card.id="q"+i;
+    var L=["A","B","C","D","E"];
+    var optsHtml=q.opts.map(function(opt,oi){
+      return "<button class=\"option-btn\" onclick=\"answer("+i+","+oi+")\" id=\"opt_"+i+"_"+oi+"\"><span class=\"option-label\">"+L[oi]+"</span><span>"+opt+"</span></button>";
+    }).join("");
+    card.innerHTML="<div class=\"q-header\"><span class=\"q-number\">Sual "+(i+1)+"/"+questions.length+"</span><span class=\"q-text\">"+q.q+"</span></div><div class=\"options\">"+optsHtml+"</div><div class=\"feedback\" id=\"fb_"+i+"\"></div><div class=\"q-nav\"><button class=\"next-btn\" id=\"next_"+i+"\" onclick=\"nextQ("+i+")\">"+( i<questions.length-1?"Növbəti &#8594;":"Nəticə &#128202;")+"</button></div>";
+    main.appendChild(card);
+  });
+}
+function answer(qIdx,optIdx){
+  var q=questions[qIdx];
+  var btns=document.querySelectorAll("[id^=\"opt_"+qIdx+"_\"]");
+  for(var b=0;b<btns.length;b++){btns[b].disabled=true;}
+  var fb=document.getElementById("fb_"+qIdx);
+  var L=["A","B","C","D","E"];
+  if(optIdx===q.ans){
+    score++;
+    document.getElementById("opt_"+qIdx+"_"+optIdx).classList.add("correct");
+    fb.innerHTML="&#10003; Düzgündür!";
+    fb.className="feedback show correct-fb";
+  } else {
+    wrong++;
+    document.getElementById("opt_"+qIdx+"_"+optIdx).classList.add("wrong");
+    document.getElementById("opt_"+qIdx+"_"+q.ans).classList.add("correct");
+    fb.innerHTML="&#10007; Yanlışdır! Düzgün cavab: "+L[q.ans]+") "+q.opts[q.ans];
+    fb.className="feedback show wrong-fb";
+  }
+  document.getElementById("next_"+qIdx).classList.add("show");
+}
+function nextQ(cur){
+  document.getElementById("q"+cur).classList.remove("active");
+  var nxt=cur+1;
+  if(nxt<questions.length){
+    document.getElementById("q"+nxt).classList.add("active");
+    var pct=Math.round((nxt/questions.length)*100);
+    document.getElementById("progressBar").style.width=Math.max(pct,1)+"%";
+    document.getElementById("counter").textContent=(nxt+1)+" / "+questions.length;
+  } else {showResult();}
+}
+function showResult(){
+  document.getElementById("quizMain").style.display="none";
+  document.getElementById("result-screen").classList.add("show");
+  var pct=Math.round((score/questions.length)*100);
+  var el=document.getElementById("resultScore");
+  el.textContent=score+" / "+questions.length;
+  el.className="result-score "+(pct>=70?"score-green":pct>=50?"score-yellow":"score-red");
+  document.getElementById("resultEmoji").textContent=pct>=70?"&#127942;":"&#128170;";
+  document.getElementById("correctCount").textContent=score;
+  document.getElementById("wrongCount").textContent=wrong;
+  document.getElementById("percentCount").textContent=pct+"%";
+  document.getElementById("progressBar").style.width="100%";
+}
+function restartQuiz(){
+  score=0;wrong=0;
+  document.getElementById("result-screen").classList.remove("show");
+  document.getElementById("quizMain").style.display="";
+  document.getElementById("progressBar").style.width="1%";
+  document.getElementById("counter").textContent="1 / "+questions.length;
+  buildQuestions();
+}
+buildQuestions();
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Noun Advanced — Mixed Test</title>
+<link rel="stylesheet" href="quiz-template.css"/>
+</head>
+<body>
+
+<div class="quiz-header">
+  <a href="index.html">← Ana Səhifə</a>
+  <div class="quiz-title">📝 Noun — Advanced Mixed</div>
+  <div class="quiz-counter" id="counter">1 / 50</div>
+</div>
+<div class="progress-wrap">
+  <div class="progress-bar" id="progressBar" style="width:2%"></div>
+</div>
+
+<main id="quizMain"></main>
+
+<div id="result-screen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+  <div class="result-title">Test Başa Çatdı!</div>
+  <div class="result-score" id="resultScore"></div>
+  <div class="result-detail">
+    <div class="result-stat"><div class="result-stat-num stat-c" id="correctCount">0</div><div class="result-stat-lbl">✅ Düzgün</div></div>
+    <div class="result-stat"><div class="result-stat-num stat-w" id="wrongCount">0</div><div class="result-stat-lbl">❌ Yanlış</div></div>
+    <div class="result-stat"><div class="result-stat-num" style="color:#2563eb" id="percentCount">0%</div><div class="result-stat-lbl">Nəticə</div></div>
+  </div>
+  <button class="restart-btn" onclick="restartQuiz()">🔄 Yenidən Başla</button>
+  <a href="index.html" class="back-btn-result">🏠 Ana Səhifə</a>
+</div>
+
+<script>
+const questions = [
+  { q: "The structural inspector scrutinized the steel beams and reported that two _______ had formed after the seismic tremor.", opts: ["crashs","crash","crashes","crash's","crashes"], ans: 2 },
+  { q: "While auditing the ancient lineage of the Mediterranean basin, the genealogist traced the descendants of several local _______.", opts: ["monarchies","monarchies's","monarchs","monarchieses","monarch's"], ans: 0 },
+  { q: "During our trek through the mountainous terrain, we were delighted to hear our voices create multiple distinct _______ against the valley walls.", opts: ["echos","echo","echo's","echoes","echoese"], ans: 3 },
+  { q: "The marine biologists were astonished to discover a cluster of rare, colorful _______ flourishing in the deep hydrothermal vents.", opts: ["fishes","fish's","fish","fishs","fishies"], ans: 2 },
+  { q: "According to the latest scientific consensus, these recent statistical _______ clearly indicate an anomaly in global climate patterns.", opts: ["datum","datas","dataes","data","data's"], ans: 3 },
+  { q: "The university library recently digitized a vast _______ of medieval texts to facilitate cross-linguistic analysis for researchers.", opts: ["corpuses","corpora","corpii","corporas","corpus's"], ans: 1 },
+  { q: "When editing your final doctoral dissertation, you must verify that there are exactly two _______ in the spelling of the word 'necessary'.", opts: ["c's","cs","c","c'es","cs'"], ans: 0 },
+  { q: "The military tribunal announced that two separate _______ would be convened next Monday to review the conduct of the officers.", opts: ["court martials","courts martials","court's martials","courts martial","court-martiales"], ans: 3 },
+  { q: "As the industrial strike escalated, the local police _______ deployed to secure the perimeter, and the venue's security staff _______ alerted.", opts: ["was / was","is / has","are / were","are / was","is / were"], ans: 2 },
+  { q: "The architectural firm decided to relocate because the old _______ located near the harbor was no longer functionally adequate.", opts: ["headquarter","headquarters","headquarter's","headquarters's","headquarteres"], ans: 1 },
+  { q: "The survivalist demonstrated how to bundle dry twigs into tight _______ to ensure the campfire would burn throughout the night.", opts: ["loafs","sheaves","sheafs","shefs","shaves"], ans: 1 },
+  { q: "Heavy cargo vessels docked smoothly along the ancient wooden _______ after navigating through the narrow coastal channel.", opts: ["wharves","wharfs","wharfes","Both A and B are correct","Neither A nor B is correct"], ans: 3 },
+  { q: "The vendor at the old market square politely requested, 'That will be exactly five _______ for the newspapers, sir.'", opts: ["penny","pence","pennies","pences","penny's"], ans: 1 },
+  { q: "The academic advisor warned the freshman that advanced _______ is a highly challenging subject if one lacks analytical skills.", opts: ["mathematics","mathematic","mathematicses","mathematics'","many mathematics"], ans: 0 },
+  { q: "The documentary highlighted how the rural _______ were moving toward greener valleys due to the sudden lack of fresh water.", opts: ["cattles","cattle","cattle's","single cattle","much cattle"], ans: 1 },
+  { q: "After a thorough medical evaluation, the pediatrician confirmed that the toddler was suffering from _______, a common childhood illness.", opts: ["a measles","measles","measleses","many measles","measles'"], ans: 1 },
+  { q: "The project manager emphasized that there was very _______ point in continuing the debate since the final budget was already approved.", opts: ["few","many","little","much","a few"], ans: 2 },
+  { q: "Due to the severe winter storm, the airport authority issued a warning that flights would be delayed in all _______.", opts: ["weather","weathers","weather's","weatheres","much weather"], ans: 1 },
+  { q: "To excel in international diplomacy, a negotiator must possess a profound _______ of regional political history and customs.", opts: ["knowledge","first-class knowledge","a first-class knowledge","deep knowledge","many knowledge"], ans: 2 },
+  { q: "The border patrol agents inspected the vehicle and uncovered a massive stash of illegal items hidden behind the _______.", opts: ["grocery","groceries","grocery's","three groceries","groceryes"], ans: 1 },
+  { q: "Before the expedition began, the seasoned mountaineer offered us a valuable _______ of advice regarding high-altitude acclimatization.", opts: ["item","slice","loaf","piece","length"], ans: 3 },
+  { q: "The child looked out the bedroom window and gasped as a brilliant _______ of lightning illuminated the entire dark forest.", opts: ["clap","flash","stroke","grain","drop"], ans: 1 },
+  { q: "While walking along the river bank, the geologist picked up a tiny _______ of truth hidden within the legendary local folklore.", opts: ["grain","drop","blade","sheet","strip"], ans: 0 },
+  { q: "Before starting the tournament, the dealer picked up a fresh _______ of cards and began shuffling them with incredible speed.", opts: ["deck","pack","herd","Both A and B are correct","None of the choices is correct"], ans: 3 },
+  { q: "The hotel manager requested a new _______ of matching dishes to eleganten the main dining hall for the upcoming royal banquet.", opts: ["pack","bunch","set","herd","group"], ans: 2 },
+  { q: "In her commemorative lecture, the professor referred to the immortal works of _______ as the cornerstone of English literature.", opts: ["the Dickens'","Dickens's","the Dickens's","Dickenss'","Dickens'"], ans: 1 },
+  { q: "The real estate agent escorted us to _______ new house at the end of Maple Avenue.", opts: ["the Smiths","the Smiths'","the Smith's","the Smithes'","the Smith"], ans: 1 },
+  { q: "After months of deliberation, _______ decision to increase the minimum wage was finally announced in a formal press release.", opts: ["the government's","the governments'","the government","governments","the governments"], ans: 0 },
+  { q: "Due to the destructive storm, the entire _______ was torn off by the fierce wind during last night's severe weather event.", opts: ["roof of the house","house's roof","houses roof","house roof's","roofing of house"], ans: 0 },
+  { q: "The legal team argued successfully that the _______ was unjustified given the model prisoner's impeccable record.", opts: ["prisoner's release","release of the prisoner's","prisoners release","prisoner release's","release prisoner's"], ans: 0 },
+  { q: "Commuters were frustrated when they were informed of _______ on the main motorway due to scheduled maintenance works.", opts: ["a forty-minute delay","a forty-minutes delay","a forty minutes' delay","forty-minute's delay","forty minutes delay"], ans: 0 },
+  { q: "Botanists collected specimens of rare _______ found exclusively in the highland meadows of the remote national park.", opts: ["mountain plants","mountains plants","mountain's plants","mountains' plants","mountain plant"], ans: 0 },
+  { q: "The barista carefully measured out the exact number of _______ needed for each individual cup to maintain flavour consistency.", opts: ["coffees bean","coffee bean","coffee beans","coffee's beans","coffees beans"], ans: 2 },
+  { q: "The fashion designer draped the mannequin elegantly with a luxurious _______ to showcase the new spring collection.", opts: ["silk's dress","silk dress","silken dress","dress of silk","silks dress"], ans: 2 },
+  { q: "In the countryside, a small sparrow had carefully constructed _______ from twigs and dry grass on the old oak branch.", opts: ["a bird's nest","a birds nest","a birds' nest","a nest's bird","birds' nest"], ans: 0 },
+  { q: "The textile manufacturer carefully selected the finest _______ available for the production of the luxury blanket collection.", opts: ["sheeps' wool","sheep's wool","sheeps wool","sheep wool's","sheepswool"], ans: 1 },
+  { q: "The antique furniture restorer meticulously repaired the damaged _______ before applying a fresh coat of lacquer.", opts: ["table's leg","table leg","table legs","leg's table","tables leg"], ans: 1 },
+  { q: "After much internal discussion, _______ split on the issue of budget allocation, with half opposing the newly proposed fiscal plan.", opts: ["the cabinet was","the cabinet were","the cabinets was","the cabinet's were","cabinet was"], ans: 1 },
+  { q: "According to the municipal records, _______ in 1847 to regulate the growing urban population's need for civic governance.", opts: ["the council was founded","the council were founded","the councils was founded","the councils were founded","council founded"], ans: 0 },
+  { q: "After a rather heated internal debate, _______ finally agreed to support the new environmental legislation during the annual summit.", opts: ["the committee who","the committee which","the committee whose","committees who","the committee that"], ans: 1 },
+  { q: "The manufacturer unveiled a new production facility — a state-of-the-art _______ capable of assembling two thousand units per day.", opts: ["bicycle factory","bicycles factory","bicycle's factory","bicycles' factory","bicycle factories"], ans: 0 },
+  { q: "The graduate student was asked to return all borrowed _______ to the university library before the end of the academic year.", opts: ["history books","histories book","history's books","histories books","history book's"], ans: 0 },
+  { q: "The horticulturist bent down and carefully examined several _______ to assess the overall health of the newly planted lawn.", opts: ["blade of grass","blades of grass","blade grasses","grass blades","blades grass"], ans: 1 },
+  { q: "The railway company announced that the _______ would be delayed by approximately forty minutes due to unforeseen technical difficulties.", opts: ["goods train","good's train","goods' train","good train","goodses train"], ans: 0 },
+  { q: "The newly appointed coach organized an intensive _______ regime to prepare the team for the upcoming regional championships.", opts: ["athletics training","athletic training","athletics' training","athletic's training","athletics trainings"], ans: 0 },
+  { q: "City planners debated whether to install additional _______ along the busy main boulevard to reduce traffic accidents.", opts: ["road signs","roads signs","road's signs","roads' signs","road sign's"], ans: 0 },
+  { q: "The hardware store owner arranged a display shelf with a variety of _______ so customers could compare products easily.", opts: ["box of matches","boxes of match","boxes of matches","box of match","boxs of matches"], ans: 2 },
+  { q: "The interior decorator proposed replacing the cotton curtains with _______ ones to give the dining room a more elegant appearance.", opts: ["silk","silken","silks","silk's","silkened"], ans: 1 },
+  { q: "The palaeontologist displayed a remarkably preserved piece of _______ in the museum's new prehistoric reptile exhibit.", opts: ["tortoiseshell","tortoises' shell","tortoise's shell","tortoiseshells","tortoise shell"], ans: 0 },
+  { q: "During the parliamentary session, the senator raised _______ foreign policy and regional security should be treated as separate issues.", opts: ["the question of whether","a question whether","questions of if","the question if whether","question whether"], ans: 0 }
+];
+
+let score = 0, wrong = 0;
+
+function buildQuestions() {
+  const main = document.getElementById('quizMain');
+  main.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card' + (i === 0 ? ' active' : '');
+    card.id = 'q' + i;
+    const labels = ['A','B','C','D','E'];
+    const optsHtml = q.opts.map((opt, oi) => `
+      <button class="option-btn" onclick="answer(${i},${oi})" id="opt_${i}_${oi}">
+        <span class="option-label">${labels[oi]}</span>
+        <span>${opt}</span>
+      </button>`).join('');
+    card.innerHTML = `
+      <div class="q-header">
+        <span class="q-number">Sual ${i+1}/${questions.length}</span>
+        <span class="q-text">${q.q}</span>
+      </div>
+      <div class="options">${optsHtml}</div>
+      <div class="feedback" id="fb_${i}"></div>
+      <div class="q-nav">
+        <button class="next-btn" id="next_${i}" onclick="nextQ(${i})">
+          ${i < questions.length-1 ? 'Növbəti Sual →' : '📊 Nəticəyə Bax'}
+        </button>
+      </div>`;
+    main.appendChild(card);
+  });
+}
+
+function answer(qIdx, optIdx) {
+  const q = questions[qIdx];
+  document.querySelectorAll(`[id^="opt_${qIdx}_"]`).forEach(b => b.disabled = true);
+  const fb = document.getElementById('fb_' + qIdx);
+  const labels = ['A','B','C','D','E'];
+  if (optIdx === q.ans) {
+    score++;
+    document.getElementById(`opt_${qIdx}_${optIdx}`).classList.add('correct');
+    fb.textContent = '✅ Düzgündür!';
+    fb.className = 'feedback show correct-fb';
+  } else {
+    wrong++;
+    document.getElementById(`opt_${qIdx}_${optIdx}`).classList.add('wrong');
+    document.getElementById(`opt_${qIdx}_${q.ans}`).classList.add('correct');
+    fb.textContent = `❌ Yanlışdır! Düzgün cavab: ${labels[q.ans]}) ${q.opts[q.ans]}`;
+    fb.className = 'feedback show wrong-fb';
+  }
+  document.getElementById('next_' + qIdx).classList.add('show');
+}
+
+function nextQ(cur) {
+  document.getElementById('q'+cur).classList.remove('active');
+  const nxt = cur+1;
+  if(nxt < questions.length){
+    document.getElementById('q'+nxt).classList.add('active');
+    const pct = Math.round((nxt/questions.length)*100);
+    document.getElementById('progressBar').style.width = Math.max(pct,2)+'%';
+    document.getElementById('counter').textContent = (nxt+1)+' / '+questions.length;
+  } else { showResult(); }
+}
+
+function showResult(){
+  document.getElementById('quizMain').style.display='none';
+  document.getElementById('result-screen').classList.add('show');
+  const pct = Math.round((score/questions.length)*100);
+  const el = document.getElementById('resultScore');
+  el.textContent = score+' / '+questions.length;
+  el.className = 'result-score '+(pct>=70?'score-green':pct>=50?'score-yellow':'score-red');
+  document.getElementById('resultEmoji').textContent = pct>=70?'🎉':pct>=50?'👍':'💪';
+  document.getElementById('correctCount').textContent = score;
+  document.getElementById('wrongCount').textContent = wrong;
+  document.getElementById('percentCount').textContent = pct+'%';
+  document.getElementById('progressBar').style.width='100%';
+}
+
+function restartQuiz(){
+  score=0; wrong=0;
+  document.getElementById('result-screen').classList.remove('show');
+  document.getElementById('quizMain').style.display='';
+  document.getElementById('progressBar').style.width='2%';
+  document.getElementById('counter').textContent='1 / '+questions.length;
+  buildQuestions();
+}
+
+buildQuestions();
+</script>
+</body>
+</html>
